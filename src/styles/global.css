@@ -1,2 +1,11 @@
 @import "tailwindcss";
 @plugin '@midudev/tailwind-animations';
+
+@font-face {
+  font-family: 'Inter';
+  src: url();
+}
+
+html {
+  font-family: 'Inter', sans-serif;
+}
