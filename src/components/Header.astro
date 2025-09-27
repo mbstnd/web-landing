@@ -1,19 +1,93 @@
 ---
-
+const links = [
+  { text: "Bienvenidos", href: "/" },
+  { text: "Sobre nosotros", href: "/about" },
+  { text: "Servicios", href: "/services" },
+  { text: "Contacto", href: "/contact" },
+  { text: "Inicio Clientes", href: "/" },
+  { text: "Agendar hora", href: "/" },
+]
 ---
 
-<header class="h-20 max-w-[100vw] lg:h-24">
-  <nav
-    class="group flex h-full w-full items-center justify-between px-10 lg:justify-center *:mx-4 lg:*:mx-6"
-  >
-    <div class="flex items-center">
-      <img src="/src/assets/logo.svg" alt="" class="h-12 w-auto" />
+<header class="fixed top-0 z-50 w-full">
+  <div class="backdrop-blur-sm bg-[#15BCC8]/70 border-b border-gray-700/40">
+    <div class="mx-auto max-w-7xl px-4 *:sm:px-6">
+      <nav
+        class="flex h-16 sm:h-14 md:h-14 items-center justify-between xl:justify-center"
+      >
+        <!-- Logo -->
+        <div class="flex shrink-0 items-center lg:pr-20">
+          <a href="/" class="flex items-center">
+            <img
+              src="/src/assets/logo.svg"
+              alt="Logo"
+              class="h-11 w-auto transition hover:scale-110"
+            />
+          </a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex md:items-center md:space-x-6">
+          {
+            links.map(({ text, href }) => (
+              <a
+                href={href}
+                class="text-sm text-gray-100 transition hover:text-white hover:underline"
+              >
+                {text}
+              </a>
+            ))
+          }
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-button"
+          class="md:hidden inline-flex items-center justify-center p-2 text-gray-100 hover:text-white"
+          aria-label="Menu"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </nav>
     </div>
-    <a href="/">Bienvenidos</a>
-    <a href="/about">Sobre nosotros</a>
-    <a href="/services">Servicios</a>
-    <a href="/contact">Contacto</a>
-    <a href="/">Inicio Clientes</a>
-    <a href="">Agendar hora</a>
-  </nav>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden backdrop-blur-sm bg-[#15BCC8]/90 border-b border-gray-700/40"
+  >
+    <div class="space-y-1 px-4 pb-3 pt-2">
+      {
+        links.map(({ text, href }) => (
+          <a
+            href={href}
+            class="block px-3 py-2 text-base text-gray-100 hover:text-white hover:underline"
+          >
+            {text}
+          </a>
+        ))
+      }
+    </div>
+  </div>
 </header>
+
+<script>
+  const mobileMenuButton = document.getElementById("mobile-menu-button")
+  const mobileMenu = document.getElementById("mobile-menu")
+
+  mobileMenuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden")
+  })
+</script>

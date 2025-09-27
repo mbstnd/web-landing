@@ -13,7 +13,7 @@ import Footer from "../components/Footer.astro"
     <meta name="generator" content={Astro.generator} />
     <title>Cliniservice</title>
   </head>
-  <body>
+  <body class="overeflow-x-hidden transitions-colors duration-300">
     <Header />
     <main>
       <slot />
@@ -23,15 +23,59 @@ import Footer from "../components/Footer.astro"
 </html>
 
 <style is:global>
+  /* Reset básico y variables globales */
   html,
   body {
     margin: 0;
     width: 100%;
     height: 100%;
-    background: #15bcc8;
+    position: relative;
+    color-scheme: light dark;
   }
 
+  /* Estilos del body y fondo */
+  body {
+    background-color: #020617;
+    padding-top: 4rem;
+  }
+
+  /* Pseudo-elemento para el fondo con imagen */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.9;
+    background-image: url("/src/assets/bg.avif");
+    background-position: center;
+    background-repeat: repeat-y;
+    background-size: cover;
+  }
+
+  /* Contenedor principal */
   main {
     height: 100vh;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Animaciones */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Componentes específicos */
+  header {
+    animation: fadeIn 0.5s ease-out;
   }
 </style>
